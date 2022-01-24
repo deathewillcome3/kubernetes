@@ -4,7 +4,7 @@ metadata:
     name: nextcloud-data-store
 spec:
   capacity:
-    storage: 2.9Ti
+    storage: 16Ti
   accessModes:
   - ReadWriteMany
   - ReadOnlyMany
@@ -13,7 +13,7 @@ spec:
     - nfsvers=4.1
   nfs:
     path: /storage/containers/data
-    server: zfs.clients.streisand.ovh
+    server: zfs
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -30,4 +30,4 @@ spec:
     - nfsvers=4.1
   nfs:
     path: /storage/containers/db
-    server: zfs.clients.streisand.ovh
+    server: zfs

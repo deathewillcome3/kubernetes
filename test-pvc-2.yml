@@ -11,5 +11,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain #Dont delete the volume when pod claiming it gets 
   #deleted or modified
   nfs: #Syntax for mounting nfs share to k8s
-    server: zfs.homelab.
+    server: zfs
     path: /storage/containers 
