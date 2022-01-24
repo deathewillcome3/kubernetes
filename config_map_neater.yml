@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fortune-env-configmap
+spec:
+  containers:
+  - image: luksa/fortune:env
+    name: fortune-env-configmap
+    envFrom: #This is a cleaner design because instead of manually importing each 
+    # and every variable, you can just pass in the config map and it will automatically
+    # import all the variables, prefixed by the prefix 
+    - prefix: CONFIG_  #Prefix that variables are imported under
+      configMapRef:
+        name: my-config-map #Map that contains variables too be imported 

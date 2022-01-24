@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: kubia
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - http: 
+      paths:
+      - path: /kubia
+        backend:
+          serviceName: kubia-nodeport #Which Service it is trying to look at 
+          servicePort: 80 #The port to be exposed externally 

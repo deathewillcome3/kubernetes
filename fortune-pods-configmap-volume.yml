@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod
+metadata:
+name: fortune-configmap-volume
+spec:
+containers:
+- image: nginx:alpine
+  name: web-server
+  #Mounts a configmap volume
+  volumeMounts:
+  - name: config
+    mountPath: /etc/nginx/conf.d
+    readOnly: true
+
+volumes:
+#References the config_map volume and mounts all the files from that volume 
+- name: config
+  configMap:
+    name: fortune-config
+
+#References the config_map volume and only mounts a select file on that volume
+- name: config
+  configMap:
+    name: fortune-config
+    #Selects a specific item in the config_map volume
+    items:
+    - key: my-nginx-config.conf
+      #If you specify a specific file in the config_map volume you also have to 
+      #specify a specific destination path
+      path: gzip.conf

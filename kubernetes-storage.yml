@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: nextcloud-data-store
+spec:
+  capacity:
+    storage: 2.9Ti
+  accessModes:
+  - ReadWriteMany
+  - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Retain
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /storage/containers/data
+    server: zfs.clients.streisand.ovh
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+    name: nextcloud-db-store
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+  - ReadWriteMany
+  - ReadOnlyMany
+  persistentVolumeReclaimPolicy: Delete
+  mountOptions:
+    - nfsvers=4.1
+  nfs:
+    path: /storage/containers/db
+    server: zfs.clients.streisand.ovh

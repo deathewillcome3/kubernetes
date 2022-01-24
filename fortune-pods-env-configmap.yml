@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata: 
+  name: fortune2s
+spec:
+  containers:
+  - image: luksa/fortune:args
+    env:
+    - name: INTERVAL
+      valueFrom: 
+        #THIS Setting indicates that the pod is referencing a configMap
+        configMapKeyRef:
+          #Name of the configMap that it will attempt to find
+          name: fortune-config
+          #Value in the config map that it will try to obtain 
+          key: sleep-interval

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: onlyoffice-server
+  labels:
+    app: onlyoffice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-label: onlyoffice-server
+  template:
+    metadata:
+      labels:
+        app: onlyoffice
+        pod-label: onlyoffice-server
+    spec:
+      containers: 
+      - name: onlyoffice
+        image: alehoho/oo-ce-docker-license
+        ports:
+        - name: http
+          containerPort: 80

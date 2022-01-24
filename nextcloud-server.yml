@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nextcloud-server
+  labels:
+    app: nextcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      pod-label: nextcloud-server-prod
+  template:
+    metadata:
+      labels:
+        app: nextcloud
+        pod-label: nextcloud-server-prod
+    spec:
+      containers: 
+      - name: nextcloud
+        image: nextcloud:stable
+        volumeMounts:
+        - name: server-storage
+          mountPath: /var/www/html
+        env:
+        - name: POSTGRES_DB
+          value: admin
+        - name: POSTGRES_HOST
+          value: nextcloud-db
+        - name: NEXTCLOUD_TRUSTED_DOMAINS
+          value: "nextcloud.clients.streisand.ovh"
+        ports:
+        - name: http
+          containerPort: 80
+        - name: https
+          containerPort: 443
+      volumes:
+      - name: server-storage 
+        persistentVolumeClaim: 
+          claimName: nextcloud-data-claim
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nextcloud-data-claim
+  labels:
+    app: nextcloud
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 2.9Ti
+
+        
