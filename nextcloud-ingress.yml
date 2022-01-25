@@ -13,13 +13,13 @@ metadata:
 spec:
   tls:
   - hosts:
-    - "nextcloud.clients.streisand.ovh"
-    secretName: nexcloud-tls
+    - "nextcloud.streisand.ovh"
+    secretName: nextcloud-tls
   - hosts:
-    - "onlyoffice.clients.streisand.ovh"
+    - "onlyoffice.streisand.ovh"
     secretName: onlyoffice-tls
   rules:
-  - host: "nextcloud.clients.streisand.ovh"
+  - host: "nextcloud.streisand.ovh"
     http: 
       paths:
       - path: /
@@ -29,7 +29,7 @@ spec:
             name: nextcloud-nodeport
             port:
               number: 80
-  - host: "onlyoffice.clients.streisand.ovh"
+  - host: "onlyoffice.streisand.ovh"
     http:
       paths:
       - path: /
