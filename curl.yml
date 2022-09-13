@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Pod
-metadata:
-  name: curl
-spec:
-  containers:
-  - name: main
-    image: ellerbrock/alpine-bash-curl-ssl
-    command: ["sleep", "9999999"]
